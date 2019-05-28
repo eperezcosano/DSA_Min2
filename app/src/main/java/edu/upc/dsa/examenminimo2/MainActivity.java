@@ -1,10 +1,9 @@
 package edu.upc.dsa.examenminimo2;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,13 +12,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnStart = findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
             }
-        });
+        }, 500);
+
     }
 }

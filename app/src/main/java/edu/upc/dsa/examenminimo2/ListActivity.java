@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -24,11 +24,15 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter recyclerAdapter;
     private Museums museumsList;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        //Progress Bar
+        progressBar = findViewById(R.id.indeterminateBar);
 
         //Recycle View
         recyclerView = findViewById(R.id.recycleView);
@@ -63,8 +67,8 @@ public class ListActivity extends AppCompatActivity {
             public void onResponse(Call<Museums> call, Response<Museums> response) {
                 if (response.isSuccessful()) {
                     museumsList = response.body();
-                    //sh progress
                     recyclerAdapter.setMuseumsList(museumsList);
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 
